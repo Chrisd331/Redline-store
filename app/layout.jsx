@@ -23,7 +23,7 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata = {
   title: 'Redline Supplements',
-  description: 'Australian performance supplements for fighters, footy players and serious lifters.',
+  description: 'Performance supplements for fighters, footy players and serious lifters.',
 };
 
 export default function RootLayout({ children }) {

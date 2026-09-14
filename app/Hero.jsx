@@ -74,7 +74,7 @@ export default function Hero() {
             ))}
           </h1>
           <p className="hero__sub" ref={subRef}>
-            Australian-made fuel for fighters, footy players and lifters who train past
+            Fuel for fighters, footy players and lifters who train past
             comfortable.
           </p>
           <div className="hero__bar" ref={barRef} aria-hidden="true" />

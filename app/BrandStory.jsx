@@ -18,8 +18,8 @@ const BEATS = [
     sub: 'No boardroom. No faceless label. Redline is run by one Australian who answers the messages, checks the batches, and stands behind everything that goes out the door.',
   },
   {
-    headline: 'Made here. Built to be trusted.',
-    sub: 'Australian-made formulas with nothing hidden on the label — plus the training protocols, resources and straight answers most brands never bother to give you. More than nutrition.',
+    headline: 'No shortcuts. Built to be trusted.',
+    sub: 'Formulas with nothing hidden on the label — plus the training protocols, resources and straight answers most brands never bother to give you. More than nutrition.',
   },
   {
     headline: 'Fuel for athletes who train past comfortable.',

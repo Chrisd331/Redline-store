@@ -6,7 +6,7 @@ export const revalidate = 60;
 
 export const metadata = {
   title: 'Shop the range — Redline Supplements',
-  description: 'Australian-made performance supplements. Free shipping over $99.',
+  description: 'Performance supplements. Free shipping over $99.',
 };
 
 export default async function ProductsPage() {

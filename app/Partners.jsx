@@ -14,6 +14,15 @@ const REDLINE_INSTAGRAM_URL = 'https://instagram.com/redlinesupplements';
 
 const PARTNERS = [
   {
+    name: 'Hammers Gym',
+    logo: '/partners/hammers-gym-logo.png',
+    blurb: 'Est. 1995 — a trusted local fitness centre and home to the training that fuels our community.',
+    offers: [],
+    // Optional — add Hammers Gym's site or Instagram link once you have it, and
+    // the button below will appear automatically.
+    websiteUrl: '',
+  },
+  {
     name: 'Prynce Detailing',
     logo: '/partners/prynce-detailing-logo.png',
     blurb: 'Premium car detailing — premium care, premium results.',
@@ -66,10 +75,10 @@ export default function Partners() {
         Redline Partners
       </p>
       <h2 className="partners__headline" ref={(el) => (headerRefs.current[1] = el)}>
-        Proudly partnered with Prynce Detailing
+        Proudly partnered with Hammers Gym &amp; Prynce Detailing
       </h2>
       <p className="partners__intro" ref={(el) => (headerRefs.current[2] = el)}>
-        Two local businesses backing each other — fuel your training, then take care of your ride.
+        Local businesses backing each other — train hard, then take care of your ride.
       </p>
 
       <div className="partners-grid" ref={gridRef}>
@@ -82,19 +91,23 @@ export default function Partners() {
               <h3 className="partner-card__name">{partner.name}</h3>
               <p className="partner-card__desc">{partner.blurb}</p>
 
-              <ul className="partner-card__offers">
-                {partner.offers.map((offer) => (
-                  <li key={offer}>{offer}</li>
-                ))}
-              </ul>
+              {partner.offers.length > 0 && (
+                <ul className="partner-card__offers">
+                  {partner.offers.map((offer) => (
+                    <li key={offer}>{offer}</li>
+                  ))}
+                </ul>
+              )}
 
-              <p className="partner-card__redeem">
-                DM us on Instagram{' '}
-                <a href={REDLINE_INSTAGRAM_URL} target="_blank" rel="noreferrer">
-                  {REDLINE_INSTAGRAM_HANDLE}
-                </a>{' '}
-                to get your code, then redeem it when you order.
-              </p>
+              {partner.offers.length > 0 && (
+                <p className="partner-card__redeem">
+                  DM us on Instagram{' '}
+                  <a href={REDLINE_INSTAGRAM_URL} target="_blank" rel="noreferrer">
+                    {REDLINE_INSTAGRAM_HANDLE}
+                  </a>{' '}
+                  to get your code, then redeem it when you order.
+                </p>
+              )}
 
               <div className="partner-card__cta">
                 <a href={REDLINE_INSTAGRAM_URL} target="_blank" rel="noreferrer" className="partner-card__btn">

@@ -55,7 +55,7 @@ create policy "public read active products"
 -- ---------- Seed: standard retail supplements ----------
 
 insert into products (slug, name, description, price_cents, currency, stock) values
-  ('creatine-mono-500g', 'Creatine Monohydrate 500g', 'Pure micronised creatine monohydrate. 100 serves.', 4995, 'aud', 100),
+  ('creatine-mono-500g', 'Creatine Monohydrate', 'Pure micronised creatine monohydrate. 60 serves.', 4995, 'aud', 100),
   ('whey-isolate-1kg',   'Whey Protein Isolate 1kg',  'Low-carb, fast-absorbing whey isolate. 33 serves.', 6995, 'aud', 60),
   ('pre-workout-300g',   'Pre-Workout 300g',          'Caffeine, beta-alanine and citrulline blend. 30 serves.', 5495, 'aud', 80),
   ('electrolytes-200g',  'Electrolytes 200g',         'Sodium, potassium and magnesium hydration mix.', 3495, 'aud', 120),

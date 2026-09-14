@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import Link from 'next/link';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useCart } from '../CartContext';
@@ -130,15 +131,17 @@ export default function ProductsClient({ products }) {
         <div className="grid">
           {products.map((p, i) => (
             <article key={p.id} className="card" ref={(el) => (cardRefs.current[i] = el)}>
-              <div className="thumb">
+              <Link href={`/products/${p.slug}`} className="thumb">
                 {p.image_url ? (
                   <img src={p.image_url} alt={p.name} className="thumb__photo" />
                 ) : (
                   <img src="/logo.jpg" alt="" className="thumb__watermark" aria-hidden="true" />
                 )}
-              </div>
+              </Link>
               <div className="card__body">
-                <h3>{p.name}</h3>
+                <h3>
+                  <Link href={`/products/${p.slug}`}>{p.name}</Link>
+                </h3>
                 <p className="desc">{p.description}</p>
                 <div className="card__foot">
                   <span className="price">{fmt(p.price_cents)}</span>

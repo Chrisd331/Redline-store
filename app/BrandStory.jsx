@@ -11,7 +11,7 @@ if (typeof window !== 'undefined') {
 const BEATS = [
   {
     headline: 'The supplement aisle is full of noise.',
-    sub: 'Imported fillers, big claims, brands that have never met the people they sell to. Redline started as the answer to that.',
+    sub: 'Fillers, additives, big claims, brands that have never met the people they sell to. Redline started as the answer to that.',
   },
   {
     headline: 'One person. A name behind every tub.',

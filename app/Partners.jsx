@@ -9,8 +9,8 @@ if (typeof window !== 'undefined') {
 }
 
 // Easy-to-edit contact + offer details — update these when you're ready.
-const REDLINE_INSTAGRAM_HANDLE = '@redlinesupplements';
-const REDLINE_INSTAGRAM_URL = 'https://instagram.com/redlinesupplements';
+const REDLINE_INSTAGRAM_HANDLE = '@redlinesupplementsaus';
+const REDLINE_INSTAGRAM_URL = 'https://instagram.com/redlinesupplementsaus';
 
 const PARTNERS = [
   {

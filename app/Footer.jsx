@@ -9,7 +9,7 @@ export default function Footer() {
         <p className="site-footer__line">Built for the redline.</p>
         <div className="site-footer__contact">
           <a href="mailto:hello@redlinesupplements.com.au">hello@redlinesupplements.com.au</a>
-          <a href="https://instagram.com" target="_blank" rel="noreferrer">
+          <a href="https://instagram.com/redlinesupplementsaus" target="_blank" rel="noreferrer">
             Instagram
           </a>
         </div>

@@ -870,31 +870,6 @@ a { color: inherit; }
 
 .shop-more-grid { margin-top: 8px; }
 
-/* ---------- Coming soon ---------- */
-.coming-soon { padding: 8px 20px 0; }
-.coming-soon__intro { color: var(--muted); font-size: 14px; margin-top: -10px; margin-bottom: 24px; max-width: 60ch; }
-.coming-soon__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 16px;
-}
-.coming-soon__card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  aspect-ratio: 1 / 1;
-  border-radius: 12px;
-  border: 1px dashed var(--line-strong);
-  color: var(--muted-dim);
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-.coming-soon__card svg { width: 26px; height: 26px; }
-
 /* ---------- Notify signup ---------- */
 .notify { padding: 8px 20px 72px; }
 .notify__sub { color: var(--muted); font-size: 14px; margin-top: -10px; margin-bottom: 20px; }

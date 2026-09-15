@@ -37,22 +37,11 @@ function IconShield() {
     </svg>
   );
 }
-function IconClock() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="12" cy="12" r="9" />
-      <path d="M12 7v5l3.5 2" />
-    </svg>
-  );
-}
-
 const TRUST_ITEMS = [
   { icon: <IconTruck />, label: 'Free shipping over $99' },
   { icon: <IconBolt />, label: 'Dispatched within 24h' },
   { icon: <IconShield />, label: 'Secure checkout via Stripe' },
 ];
-
-const COMING_SOON_COUNT = 3;
 
 const PICKUP_LOCATION = {
   name: 'Hammers Gym, Nunawading',
@@ -72,7 +61,6 @@ export default function ProductsClient({ products }) {
   const [fulfilment, setFulfilment] = useState('delivery');
   const featuredRef = useRef(null);
   const cardRefs = useRef([]);
-  const comingSoonRefs = useRef([]);
 
   const [featured, ...rest] = products;
 
@@ -134,17 +122,6 @@ export default function ProductsClient({ products }) {
             once: true,
             onEnter: (batch) =>
               gsap.to(batch, { opacity: 1, y: 0, duration: 0.6, stagger: 0.08, ease: 'power2.out', clearProps: 'transform' }),
-          });
-        }
-
-        const comingSoon = comingSoonRefs.current.filter(Boolean);
-        if (comingSoon.length) {
-          gsap.set(comingSoon, { opacity: 0, y: 20 });
-          ScrollTrigger.batch(comingSoon, {
-            start: 'top 90%',
-            once: true,
-            onEnter: (batch) =>
-              gsap.to(batch, { opacity: 1, y: 0, duration: 0.5, stagger: 0.08, ease: 'power2.out', clearProps: 'transform' }),
           });
         }
       }
@@ -221,19 +198,6 @@ export default function ProductsClient({ products }) {
             ))}
           </div>
         )}
-      </section>
-
-      <section className="wrap coming-soon">
-        <h2 className="section-title">More on the way</h2>
-        <p className="coming-soon__intro">We're expanding the range — here's a preview of what's coming.</p>
-        <div className="coming-soon__grid">
-          {Array.from({ length: COMING_SOON_COUNT }).map((_, i) => (
-            <div className="coming-soon__card" key={i} ref={(el) => (comingSoonRefs.current[i] = el)}>
-              <IconClock />
-              <span>Coming Soon</span>
-            </div>
-          ))}
-        </div>
       </section>
 
       <section className="wrap notify">

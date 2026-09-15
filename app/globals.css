@@ -963,13 +963,37 @@ a { color: inherit; }
   margin-bottom: 22px;
   font-variant-numeric: tabular-nums;
 }
+.product-detail__spec {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 24px;
+  padding: 16px 18px;
+  margin: 0 0 22px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+.product-detail__spec > div { display: flex; justify-content: space-between; gap: 10px; }
+.product-detail__spec dt { color: var(--muted); font-size: 13px; margin: 0; }
+.product-detail__spec dd { color: var(--ink); font-weight: 700; font-size: 13px; margin: 0; font-variant-numeric: tabular-nums; }
 .product-detail__desc p {
   color: var(--muted);
   font-size: 15px;
   line-height: 1.7;
   margin-bottom: 14px;
 }
-.product-detail__cta { margin-top: 10px; }
+.product-detail__section { margin-top: 24px; }
+.product-detail__section h2 {
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+.product-detail__section p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.65;
+}
+.product-detail__cta { margin-top: 24px; }
 .product-detail__add {
   background: var(--red);
   color: #fff;

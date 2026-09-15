@@ -35,6 +35,9 @@ export default function ProductDetailClient({ product }) {
   const fmt = (cents) => `$${(cents / 100).toFixed(2)}`;
   const paragraphs = (product.description || '').split('\n\n').filter(Boolean);
 
+  const hasSpec = product.net_weight_g && product.serving_size_g && product.serves_per_container;
+  const pricePerServe = hasSpec ? Math.round(product.price_cents / product.serves_per_container) : null;
+
   return (
     <main className="wrap product-detail">
       <Link href="/products" className="product-detail__back">
@@ -54,11 +57,46 @@ export default function ProductDetailClient({ product }) {
           <h1 className="product-detail__name">{product.name}</h1>
           <div className="product-detail__price">{fmt(product.price_cents)}</div>
 
+          {hasSpec && (
+            <dl className="product-detail__spec">
+              <div>
+                <dt>Net weight</dt>
+                <dd>{product.net_weight_g}g</dd>
+              </div>
+              <div>
+                <dt>Serving size</dt>
+                <dd>{product.serving_size_g}g</dd>
+              </div>
+              <div>
+                <dt>Serves per tub</dt>
+                <dd>{product.serves_per_container}</dd>
+              </div>
+              <div>
+                <dt>Price per serve</dt>
+                <dd>{pricePerServe}c</dd>
+              </div>
+            </dl>
+          )}
+
           <div className="product-detail__desc">
             {paragraphs.map((para, i) => (
               <p key={i}>{para}</p>
             ))}
           </div>
+
+          {product.directions && (
+            <div className="product-detail__section">
+              <h2>Directions</h2>
+              <p>{product.directions}</p>
+            </div>
+          )}
+
+          {product.ingredients && (
+            <div className="product-detail__section">
+              <h2>Ingredients</h2>
+              <p>{product.ingredients}</p>
+            </div>
+          )}
 
           <div className="product-detail__cta">
             <button type="button" className="product-detail__add" onClick={() => add(product.id)}>

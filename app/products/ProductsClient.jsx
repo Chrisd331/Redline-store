@@ -54,10 +54,22 @@ const TRUST_ITEMS = [
 
 const COMING_SOON_COUNT = 3;
 
+const PICKUP_LOCATION = {
+  name: 'Hammers Gym, Nunawading',
+  address: '244 Whitehorse Rd, Nunawading VIC 3131',
+  hours: [
+    'Mon, Tue, Wed, Thu: 10am–9:30pm',
+    'Fri: 10am–8pm',
+    'Sat: 9am–3pm',
+    'Sun: Closed',
+  ],
+};
+
 export default function ProductsClient({ products }) {
   const { cart, add, remove } = useCart();
   const [loading, setLoading] = useState(false);
   const [notifyEmail, setNotifyEmail] = useState('');
+  const [fulfilment, setFulfilment] = useState('delivery');
   const featuredRef = useRef(null);
   const cardRefs = useRef([]);
   const comingSoonRefs = useRef([]);
@@ -77,6 +89,7 @@ export default function ProductsClient({ products }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           items: inCart.map((p) => ({ id: p.id, quantity: cart[p.id] })),
+          fulfilment,
         }),
       });
       const data = await res.json();
@@ -262,6 +275,42 @@ export default function ProductsClient({ products }) {
               <span>Total</span>
               <span>{fmt(total)}</span>
             </div>
+
+            <fieldset className="fulfilment">
+              <legend>Fulfilment</legend>
+              <label className="fulfilment__option">
+                <input
+                  type="radio"
+                  name="fulfilment"
+                  value="pickup"
+                  checked={fulfilment === 'pickup'}
+                  onChange={() => setFulfilment('pickup')}
+                />
+                Pick up — {PICKUP_LOCATION.name} — $0
+              </label>
+              <label className="fulfilment__option">
+                <input
+                  type="radio"
+                  name="fulfilment"
+                  value="delivery"
+                  checked={fulfilment === 'delivery'}
+                  onChange={() => setFulfilment('delivery')}
+                />
+                Delivery
+              </label>
+
+              {fulfilment === 'pickup' && (
+                <div className="fulfilment__pickup-details">
+                  <p>{PICKUP_LOCATION.address}</p>
+                  <ul>
+                    {PICKUP_LOCATION.hours.map((line) => (
+                      <li key={line}>{line}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </fieldset>
+
             <button className="checkout" disabled={loading} onClick={checkout}>
               {loading ? 'Redirecting to payment…' : 'Checkout'}
             </button>

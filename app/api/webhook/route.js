@@ -28,6 +28,7 @@ export async function POST(req) {
       currency: session.currency ?? 'aud',
       status: 'paid',
       stripe_session_id: session.id,
+      fulfilment_method: session.metadata?.fulfilment_method === 'pickup' ? 'pickup' : 'delivery',
     });
   }
 

@@ -41,7 +41,7 @@ export default function ShippingPage() {
       <ul>
         <li>Delivery time: [PLACEHOLDER — e.g. "2–5 business days metro, up to 10 regional"]</li>
         <li>Carrier: [PLACEHOLDER — e.g. Australia Post / Sendle]</li>
-        <li>Shipping cost: Free on orders over $99. Orders under $99: [PLACEHOLDER flat rate]</li>
+        <li>Shipping cost: Free on orders over $99. Orders under $99: $15 flat rate.</li>
         <li>Order tracking: [PLACEHOLDER — do you provide a tracking number/email?]</li>
       </ul>
 

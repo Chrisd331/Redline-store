@@ -3,6 +3,10 @@ import { supabaseAdmin } from '../../../lib/supabase';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
+// Matches the "Free shipping over $99" trust badge on /products.
+const FREE_DELIVERY_THRESHOLD_CENTS = 9900;
+const DELIVERY_FEE_CENTS = 1500;
+
 export async function POST(req) {
   try {
     const { items, fulfilment } = await req.json();
@@ -38,6 +42,9 @@ export async function POST(req) {
       };
     });
 
+    const subtotalCents = line_items.reduce((sum, li) => sum + li.price_data.unit_amount * li.quantity, 0);
+    const deliveryFeeCents = subtotalCents >= FREE_DELIVERY_THRESHOLD_CENTS ? 0 : DELIVERY_FEE_CENTS;
+
     const site = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
     const session = await stripe.checkout.sessions.create({
@@ -46,9 +53,19 @@ export async function POST(req) {
       success_url: `${site}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${site}/`,
       metadata: { fulfilment_method: fulfilmentMethod },
-      // Pickup: no address needed, no shipping charge. Delivery: unchanged.
+      // Pickup: no address needed, no shipping charge. Delivery: address
+      // collection plus a flat $15 fee, waived over the free-shipping threshold.
       ...(fulfilmentMethod === 'delivery' && {
         shipping_address_collection: { allowed_countries: ['AU'] },
+        shipping_options: [
+          {
+            shipping_rate_data: {
+              type: 'fixed_amount',
+              fixed_amount: { amount: deliveryFeeCents, currency: 'aud' },
+              display_name: deliveryFeeCents === 0 ? 'Free delivery' : 'Delivery',
+            },
+          },
+        ],
       }),
     });
 

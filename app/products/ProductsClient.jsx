@@ -43,6 +43,11 @@ const TRUST_ITEMS = [
   { icon: <IconShield />, label: 'Secure checkout via Stripe' },
 ];
 
+// Matches the "Free shipping over $99" trust badge above and the fee
+// applied server-side in /api/checkout.
+const FREE_DELIVERY_THRESHOLD_CENTS = 9900;
+const DELIVERY_FEE_CENTS = 1500;
+
 const PICKUP_LOCATION = {
   name: 'Hammers Gym, Nunawading',
   address: '244 Whitehorse Rd, Nunawading VIC 3131',
@@ -66,6 +71,9 @@ export default function ProductsClient({ products }) {
 
   const inCart = products.filter((p) => cart[p.id]);
   const total = inCart.reduce((sum, p) => sum + p.price_cents * cart[p.id], 0);
+  const deliveryFee =
+    fulfilment === 'delivery' && total < FREE_DELIVERY_THRESHOLD_CENTS ? DELIVERY_FEE_CENTS : 0;
+  const grandTotal = total + deliveryFee;
   const fmt = (cents) => `$${(cents / 100).toFixed(2)}`;
   const featuredTeaser = featured?.description?.split('\n\n')[0] || '';
 
@@ -235,11 +243,6 @@ export default function ProductsClient({ products }) {
                 </div>
               </div>
             ))}
-            <div className="cartTotal">
-              <span>Total</span>
-              <span>{fmt(total)}</span>
-            </div>
-
             <fieldset className="fulfilment">
               <legend>Fulfilment</legend>
               <label className="fulfilment__option">
@@ -260,7 +263,7 @@ export default function ProductsClient({ products }) {
                   checked={fulfilment === 'delivery'}
                   onChange={() => setFulfilment('delivery')}
                 />
-                Delivery
+                Delivery — {deliveryFee > 0 ? `${fmt(DELIVERY_FEE_CENTS)}` : 'Free over $99'}
               </label>
 
               {fulfilment === 'pickup' && (
@@ -274,6 +277,21 @@ export default function ProductsClient({ products }) {
                 </div>
               )}
             </fieldset>
+
+            <div className="cartTotal cartTotal--sub">
+              <span>Subtotal</span>
+              <span>{fmt(total)}</span>
+            </div>
+            {fulfilment === 'delivery' && (
+              <div className="cartTotal cartTotal--sub">
+                <span>Delivery</span>
+                <span>{deliveryFee > 0 ? fmt(deliveryFee) : 'Free'}</span>
+              </div>
+            )}
+            <div className="cartTotal">
+              <span>Total</span>
+              <span>{fmt(grandTotal)}</span>
+            </div>
 
             <button className="checkout" disabled={loading} onClick={checkout}>
               {loading ? 'Redirecting to payment…' : 'Checkout'}

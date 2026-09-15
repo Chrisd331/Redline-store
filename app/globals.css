@@ -1352,9 +1352,53 @@ button:disabled { opacity: 0.55; cursor: default; }
 .site-footer__contact { display: flex; gap: 18px; }
 .site-footer__contact a { color: var(--muted); text-decoration: none; font-size: 13px; font-weight: 600; }
 .site-footer__contact a:hover { color: var(--red-bright); }
+.site-footer__legal {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 18px 20px 32px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.site-footer__legal-links { display: flex; flex-wrap: wrap; gap: 16px; }
+.site-footer__legal-links a { color: var(--muted-dim); text-decoration: none; font-size: 12px; }
+.site-footer__legal-links a:hover { color: var(--red-bright); }
+.site-footer__abn { color: var(--muted-dim); font-size: 12px; }
 @media (max-width: 640px) {
   .site-footer__inner { flex-direction: column; align-items: flex-start; text-align: left; }
+  .site-footer__legal { flex-direction: column; align-items: flex-start; }
 }
+
+/* ---------- Legal pages (drafts) ---------- */
+.legal-page { padding: 48px 20px 80px; max-width: 760px; }
+.legal-page__draft-banner {
+  background: var(--panel);
+  border: 1px solid var(--red);
+  color: var(--muted);
+  padding: 14px 16px;
+  border-radius: 10px;
+  font-size: 13px;
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+.legal-page__draft-banner strong { color: var(--red-bright); }
+.legal-page__placeholder { color: var(--red-bright); font-weight: 700; }
+.legal-page h1 {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-style: italic;
+  font-size: clamp(26px, 4vw, 36px);
+  margin-bottom: 8px;
+}
+.legal-page__updated { color: var(--muted-dim); font-size: 12px; margin-bottom: 32px; }
+.legal-page h2 { font-size: 16px; font-weight: 700; margin: 32px 0 10px; }
+.legal-page p { color: var(--muted); font-size: 14px; line-height: 1.7; margin-bottom: 4px; }
+.legal-page ul { padding-left: 20px; margin: 8px 0 16px; }
+.legal-page li { color: var(--muted); font-size: 14px; line-height: 1.7; }
+.legal-page a { color: var(--red-bright); }
 
 /* ---------- Success page ---------- */
 .success {

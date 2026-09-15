@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function Footer() {
   return (
     <footer className="site-footer">
@@ -13,6 +15,15 @@ export default function Footer() {
             Instagram
           </a>
         </div>
+      </div>
+      <div className="site-footer__legal">
+        <nav className="site-footer__legal-links">
+          <Link href="/shipping">Shipping</Link>
+          <Link href="/returns">Returns</Link>
+          <Link href="/terms">Terms</Link>
+          <Link href="/privacy">Privacy</Link>
+        </nav>
+        <span className="site-footer__abn">ABN 39 538 456 199</span>
       </div>
     </footer>
   );

@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useAuth } from './AuthContext';
 import { useCart } from './CartContext';
 
@@ -12,6 +12,18 @@ function IconCart() {
       <circle cx="9" cy="20" r="1.4" />
       <circle cx="17" cy="20" r="1.4" />
       <path d="M2.5 3h2l2.4 12.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.6L21 7H6" />
+    </svg>
+  );
+}
+
+function IconMenu({ open }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      {open ? (
+        <path d="M5 5l14 14M19 5 5 19" />
+      ) : (
+        <path d="M4 7h16M4 12h16M4 17h16" />
+      )}
     </svg>
   );
 }
@@ -28,6 +40,7 @@ export default function Header() {
   const pathname = usePathname();
   const router = useRouter();
   const headerRef = useRef(null);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => {
@@ -37,6 +50,11 @@ export default function Header() {
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  // Close the mobile menu whenever the route changes.
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
 
   const firstName = user?.user_metadata?.full_name?.split(' ')[0];
 
@@ -57,7 +75,7 @@ export default function Header() {
           </span>
         </Link>
 
-        <nav className="site-nav">
+        <nav className={`site-nav${menuOpen ? ' site-nav--open' : ''}`}>
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
@@ -70,6 +88,16 @@ export default function Header() {
         </nav>
 
         <div className="site-header__actions">
+          <button
+            type="button"
+            className="nav-toggle"
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((v) => !v)}
+          >
+            <IconMenu open={menuOpen} />
+          </button>
+
           {!loading && (
             user ? (
               <div className="auth-nav">
